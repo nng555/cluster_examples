@@ -1,14 +1,5 @@
 #!/bin/bash
 
-ssbatch () { 
-  while [ $(squeue -u $USER | grep R | wc -l) -gt $1 ]
-  do 
-    echo "waiting..."
-    sleep 10
-  done
-  sbatch $2 
-}
-
 d=`date +%Y-%m-%d`
 partition=$1
 j_name=$2
@@ -40,8 +31,7 @@ bash ${j_dir}/scripts/${j_name}.sh
 echo -n "#!/bin/bash
 ln -s /checkpoint/$USER/\$SLURM_JOB_ID ${j_dir}/\$SLURM_JOB_ID
 touch ${j_dir}/\$SLURM_JOB_ID/DELAYPURGE
-r_dir=$j_dir/\$SLURM_JOB_ID
 $cmd
 " > $j_dir/scripts/${j_name}.sh
 
-ssbatch 100 $j_dir/scripts/${j_name}.slrm --qos normal
+sbatch $j_dir/scripts/${j_name}.slrm --qos normal
