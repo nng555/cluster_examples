@@ -1,0 +1,3 @@
+data:
+  path: /path/to/my/data2
+  criterion: mse

@@ -1,0 +1,18 @@
+defaults:
+  - hydra/launcher: slurm
+
+slurm:
+  gres: gpu:1
+  job_name:
+    - example
+    - job
+  partition: gpu
+  cpus_per_task: 4
+  ntasks_per_node: 1
+  mem: 22G
+  nodes: 1
+  qos: normal
+
+train:
+  lr: 0.01
+  dropout: 0.2

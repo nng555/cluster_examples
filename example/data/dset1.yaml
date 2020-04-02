@@ -1,0 +1,3 @@
+data:
+  path: /path/to/data
+  criterion: nll
